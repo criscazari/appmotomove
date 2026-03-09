@@ -233,7 +233,9 @@ let mensagem =
 Distância: ${distancia} km
 Valor estimado: R$ ${valor.toFixed(2)}`
 
-let link = "https://wa.me/?text=" + encodeURIComponent(mensagem)
+let numero = "5518981010315"
+
+let link = "https://wa.me/" + numero + "?text=" + encodeURIComponent(mensagem)
 
 window.open(link)
 
