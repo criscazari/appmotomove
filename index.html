@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Motogirl Cris Cazari</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+background:#0f0f0f;
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+color:white;
+}
+
+.container{
+width:360px;
+background:#1a1a1a;
+border-radius:16px;
+padding:25px;
+box-shadow:0 0 20px rgba(0,0,0,0.6);
+}
+
+.header{
+text-align:center;
+margin-bottom:20px;
+}
+
+.header h1{
+color:#ffd000;
+font-size:22px;
+}
+
+.subtitle{
+font-size:13px;
+color:#bbb;
+}
+
+.label{
+margin-top:15px;
+font-size:14px;
+}
+
+input{
+width:100%;
+padding:12px;
+margin-top:6px;
+border-radius:8px;
+border:none;
+font-size:16px;
+}
+
+.quick-buttons{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:8px;
+margin-top:10px;
+}
+
+.quick-buttons button{
+padding:8px;
+border:none;
+border-radius:6px;
+background:#333;
+color:white;
+cursor:pointer;
+}
+
+.quick-buttons button:hover{
+background:#ffd000;
+color:black;
+}
+
+.options{
+margin-top:15px;
+display:flex;
+justify-content:space-between;
+font-size:14px;
+}
+
+.options input{
+margin-right:5px;
+}
+
+.calc-btn{
+width:100%;
+margin-top:20px;
+padding:14px;
+border:none;
+border-radius:10px;
+background:#ffd000;
+font-weight:bold;
+font-size:16px;
+cursor:pointer;
+}
+
+.result{
+margin-top:18px;
+text-align:center;
+font-size:20px;
+}
+
+.whatsapp{
+margin-top:15px;
+width:100%;
+padding:14px;
+border:none;
+border-radius:10px;
+background:#25D366;
+color:white;
+font-weight:bold;
+font-size:16px;
+cursor:pointer;
+}
+
+.footer{
+margin-top:20px;
+font-size:12px;
+text-align:center;
+color:#888;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="header">
+<h1>🏍️ Motogirl Cris</h1>
+<div class="subtitle">Calcule o valor da sua corrida</div>
+</div>
+
+<div class="label">Distância (km)</div>
+
+<input id="km" type="number" placeholder="Digite a distância">
+
+<div class="quick-buttons">
+
+<button onclick="setKm(5)">5 km</button>
+<button onclick="setKm(10)">10 km</button>
+<button onclick="setKm(15)">15 km</button>
+<button onclick="setKm(20)">20 km</button>
+
+<button onclick="setKm(25)">25 km</button>
+<button onclick="setKm(30)">30 km</button>
+<button onclick="setKm(40)">40 km</button>
+<button onclick="setKm(50)">50 km</button>
+
+</div>
+
+<div class="options">
+
+<label>
+<input type="checkbox" id="volta">
+Ida e volta
+</label>
+
+</div>
+
+<button class="calc-btn" onclick="calcular()">
+Calcular valor
+</button>
+
+<div class="result" id="resultado"></div>
+
+<button class="whatsapp" onclick="whatsapp()">
+Solicitar corrida no WhatsApp
+</button>
+
+<div class="footer">
+Atendimento para mulheres
+</div>
+
+</div>
+
+<script>
+
+/* CONFIGURAÇÃO INTERNA */
+
+const VALOR_KM = 2
+const TAXA_BASE = 5
+const MINIMO = 15
+
+let distancia = 0
+let valor = 0
+
+function setKm(v){
+
+document.getElementById("km").value = v
+calcular()
+
+}
+
+function calcular(){
+
+distancia = parseFloat(document.getElementById("km").value)
+
+if(!distancia) return
+
+if(document.getElementById("volta").checked){
+distancia = distancia * 2
+}
+
+if(distancia < 5){
+valor = MINIMO
+}else{
+valor = (distancia * VALOR_KM) + TAXA_BASE
+}
+
+document.getElementById("resultado").innerHTML =
+"Valor estimado: <b>R$ " + valor.toFixed(2) + "</b>"
+
+}
+
+function whatsapp(){
+
+let mensagem =
+`Olá Cris! Gostaria de solicitar corrida 🏍️
+
+Distância: ${distancia} km
+Valor estimado: R$ ${valor.toFixed(2)}`
+
+let link = "https://wa.me/?text=" + encodeURIComponent(mensagem)
+
+window.open(link)
+
+}
+
+</script>
+
+</body>
+</html>
